@@ -1,0 +1,24 @@
+
+
+    <div class="form-group" , style="font-size:16px;">
+      <lable class: 'col-sm-3 control-label', style="color:#1874CD;font-size:20px">课  程</lable>  
+           <text, style="padding-left: 20px"> <%= @notice.course_name %></text>
+    </div>
+
+
+
+    <div class="form-group", style="font-size:16px;">
+      <lable class: 'col-sm-3 control-label', style="color:#1874CD;font-size:20px">时  间</lable>  
+           <text , style="padding-left: 20px"> <%= @notice.updated_at %></text>
+    </div>
+
+    <div class="form-group", style="font-size:16px;">
+      <lable class: 'col-sm-3 control-label', style="color:#1874CD;font-size:20px">主  题</lable>  
+           <text, style="padding-left: 20px"> <%= @notice.theme %></text>
+    </div>
+
+    <div class="form-group", style="font-size:16px;">
+      <lable class: 'col-sm-3 control-label', style="color:#1874CD;font-size:20px">内  容</lable>  
+           <text, style="padding-left: 20px"> <%= @notice.content %></text> 
+    </div>
+<%= link_to '返回', notices_path, :class => "btn btn-primary btn-block" ,:style=>"font-size:16px;"%>

@@ -1,0 +1,199 @@
+<!--sgg17 -->
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-sm-2">
+      <%= render "shared/sidenav" %>
+    </div>
+
+    <div class="col-sm-10"  style="padding-right: 50px">
+
+      <div class="panel panel-primary filterable">
+        <div class="panel-heading">
+          <h3 class="panel-title">课程评估详情</h3>
+        </div>
+
+        <div class="panel-body">
+ 
+          <h4>评估课程: <div style="color:#1874CD;display:inline"><%= @course.name %></div> 
+              &nbsp &nbsp 主讲教师：<div style="color:#1874CD;display:inline"><%= @course.teacher.name %></div></h4>
+           
+
+ 
+          <table class="table table-responsive table-condensed table-hover">
+            <thead>
+            <tr style="font-size:16px;">
+              <th>序号</th>
+              <th>评估内容</th>
+              <th>评分详情</th>
+            </tr>
+
+            <tbody  style="font-size:16px;">
+              <tr>
+                <td>1</td>
+                <td>治学严整、言传身教</td>
+                <td>
+                  <%= radio_button_tag(:score1, "1") %>
+                  <%= label_tag(:score1_1, "优"+@label11,:style=>"color:#FF6384;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score1, "2") %>
+                  <%= label_tag(:score1_2, "良"+@label12,:style=>"color:#1874CD;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score1, "3") %>
+                  <%= label_tag(:score1_3, "合格"+@label13,:style=>"color:#CDC673;") %>         &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score1, "4") %> 
+                  <%= label_tag(:score1_4, "差"+@label14,:style=>"color:#AAAAAA;") %>          &nbsp&nbsp&nbsp
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>备课充分，讲课认真</td>
+                <td>
+                  <%= radio_button_tag(:score2, "1") %>
+                  <%= label_tag(:score2_1, "优"+@label21,:style=>"color:#FF6384;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score2, "2") %>
+                  <%= label_tag(:score2_2, "良"+@label22,:style=>"color:#1874CD;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score2, "3") %>
+                  <%= label_tag(:score2_3, "合格"+@label23,:style=>"color:#CDC673;") %>         &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score2, "4") %> 
+                  <%= label_tag(:score2_4, "差"+@label24,:style=>"color:#AAAAAA;") %>          &nbsp&nbsp&nbsp
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>仪装端庄，精神饱满</td>
+                <td>
+                  <%= radio_button_tag(:score3, "1") %>
+                  <%= label_tag(:score3_1, "优"+@label31,:style=>"color:#FF6384;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score3, "2") %>
+                  <%= label_tag(:score3_2, "良"+@label32,:style=>"color:#1874CD;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score3, "3") %>
+                  <%= label_tag(:score3_3, "合格"+@label33,:style=>"color:#CDC673;") %>         &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score3, "4") %> 
+                  <%= label_tag(:score3_4, "差"+@label34,:style=>"color:#AAAAAA;") %>          &nbsp&nbsp&nbsp
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>虚心听取意见，积极改进教学</td>
+                <td>
+                  <%= radio_button_tag(:score4, "1") %>
+                  <%= label_tag(:score4_1, "优"+@label41,:style=>"color:#FF6384;")%>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score4, "2") %>
+                  <%= label_tag(:score4_2, "良"+@label42,:style=>"color:#1874CD;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score4, "3") %>
+                  <%= label_tag(:score4_3, "合格"+@label43,:style=>"color:#CDC673;") %>         &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score4, "4") %> 
+                  <%= label_tag(:score4_4, "差"+@label44,:style=>"color:#AAAAAA;") %>          &nbsp&nbsp&nbsp
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>无调课、停课、替讲现象</td>
+                <td>
+                  <%= radio_button_tag(:score5, "1") %>
+                  <%= label_tag(:score5_1, "优"+@label51,:style=>"color:#FF6384;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score5, "2") %>
+                  <%= label_tag(:score5_2, "良"+@label52,:style=>"color:#1874CD;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score5, "3") %>
+                  <%= label_tag(:score5_3, "合格"+@label53,:style=>"color:#CDC673;") %>         &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score5, "4") %> 
+                  <%= label_tag(:score5_4, "差"+@label54,:style=>"color:#AAAAAA;") %>          &nbsp&nbsp&nbsp
+                </td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>教学内容基本符合教学大纲要求</td>
+                <td>
+                  <%= radio_button_tag(:score6, "1") %>
+                  <%= label_tag(:score6_1, "优"+@label61,:style=>"color:#FF6384;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score6, "2") %>
+                  <%= label_tag(:score6_2, "良"+@label62,:style=>"color:#1874CD;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score6, "3") %>
+                  <%= label_tag(:score6_3, "合格"+@label63,:style=>"color:#CDC673;") %>         &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score6, "4") %> 
+                  <%= label_tag(:score6_4, "差"+@label64,:style=>"color:#AAAAAA;") %>          &nbsp&nbsp&nbsp
+                </td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>讲授思路清晰，概念清楚</td>
+                <td>
+                  <%= radio_button_tag(:score7, "1") %>
+                  <%= label_tag(:score7_1, "优"+@label71,:style=>"color:#FF6384;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score7, "2") %>
+                  <%= label_tag(:score7_2, "良"+@label72,:style=>"color:#1874CD;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score7, "3") %>
+                  <%= label_tag(:score7_3, "合格"+@label73,:style=>"color:#CDC673;") %>         &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score7, "4") %> 
+                  <%= label_tag(:score7_4, "差"+@label74,:style=>"color:#AAAAAA;") %>          &nbsp&nbsp&nbsp
+                </td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>总体评价</td>
+                <td>
+                  <%= radio_button_tag(:score8, "1") %>
+                  <%= label_tag(:score8_1, "优"+@label81,:style=>"color:#FF6384;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score8, "2") %>
+                  <%= label_tag(:score8_2, "良"+@label82,:style=>"color:#1874CD;") %>          &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score8, "3") %>
+                  <%= label_tag(:score8_3, "合格"+@label83,:style=>"color:#CDC673;") %>         &nbsp&nbsp&nbsp
+                  <%= radio_button_tag(:score8, "4") %> 
+                  <%= label_tag(:score8_4, "差"+@label84,:style=>"color:#AAAAAA;") %>          &nbsp&nbsp&nbsp
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 >总体评价详情图:</h4>
+          <div id="mydiv" style="border:1px solid black ;width: 50%; margin-left:140px"><canvas id="myChart" ></canvas></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  var ctx = document.getElementById("myChart").getContext('2d');
+
+  var data = {
+    datasets: [{
+      data: [<%= @results[0]%>, <%= @results[1]%>, <%= @results[2]%>,<%= @results[3]%>],
+      backgroundColor: [
+      "#FF6384",
+      "#36A2EB",
+      "#FFCE56"
+      ],
+      hoverBackgroundColor: [
+      "#FF6384",
+      "#36A2EB",
+      "#FFCE56"
+      ],
+      borderWidth:[8],
+      hoverBorderWidth:[8]
+
+    }],
+
+    labels: [
+    "优",
+    "良",
+    "合格",
+    "差"
+    ]
+  };
+
+  var options={
+   cutoutPercentage:40,
+  };
+
+  var myPieChart = new Chart(ctx,{
+  type: 'pie',
+  data: data,
+  options: options
+  });
+
+</script>
+
+

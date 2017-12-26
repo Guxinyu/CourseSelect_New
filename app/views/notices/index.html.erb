@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-sm-2">
+      <%= render "shared/sidenav" %>
+    </div>
+
+    <div class="col-sm-10" style="padding-right: 50px">
+
+      <div class="panel panel-primary filterable">
+        <div class="panel-heading">
+          <% if student_logged_in? %><h3 class="panel-title">课程通知</h3> 
+          <% end %>
+           <% if teacher_logged_in? %><h3 class="panel-title">历史记录</h3>
+
+          <% end %>
+
+     
+        </div>
+
+        
+
+
+        <div class="panel-body">
+          <%= form_tag("/notices", method: "get") do %>
+          <%= text_field_tag(:q) %>
+          <%= submit_tag("搜索通知") %>
+          <% end %>
+          <table class="table table-responsive table-condensed table-hover">
+            <thead>
+            <tr style="font-size:16px;">
+              <th>序号</th>
+              <th>主题</th>
+              <th>课程</th>
+              <th>日期</th>
+            </tr>
+
+            <tbody style="font-size:16px;">
+            <% $count=0 %>
+            <% @notice.each do |notice|%>
+                <%$count=$count+1%>
+                <tr >
+                  <td><%= $count %></td>
+                  <td><%= notice.theme %></td>
+                  <td><%= notice.course_name %></td>
+                  <td><%= notice.updated_at%></td>
+                  <% if teacher_logged_in? %>
+                  <td><%= link_to "查看", check_notice_path(notice), class: 'btn btn-xs btn-primary',:style=>"font-size:14px;" %></td>
+                  <td><%= link_to "编辑", edit_notice_url(notice), class: 'btn btn-xs btn-primary',:style=>"font-size:14px;"%></td>
+                  <td><%= link_to "删除", notice_path(notice), :method => "delete", class: 'btn btn-xs btn-danger', :data => {confirm: '确定要删除此课程通知?'} ,:style=>"font-size:14px;"%></td>
+                  <% elsif student_logged_in? %>
+                      <td><%= link_to "查看", check_notice_path(notice), class: 'btn-sm btn-primary' ,:style=>"font-size:14px;"%></td>
+                  <% end %>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

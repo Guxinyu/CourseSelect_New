@@ -1,0 +1,242 @@
+<div class="panel-group" id="accordion">
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+
+        <% if teacher_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#NoticeCollapse"><span class="glyphicon glyphicon-user"></span>
+              发布通知</a>
+        <% end %>
+
+        <% if student_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#NoticeCollapse"><span class="glyphicon glyphicon-user"></span>
+              所有通知</a>
+        <% end %>
+      </h4>
+    </div>
+
+    <div id="NoticeCollapse" class="panel-collapse collapse <%= "in" if ["notices"].include?(params[:controller]) %>">
+      <div class="list-group">
+
+        <% if student_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to notices_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 所有通知
+              <% end %>
+            </li>
+        <% end %>
+        <% if teacher_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to notices_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 历史记录
+              <% end %>
+            </li>
+             <li class="list-group-item">
+              <%= link_to new_notice_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 创建通知
+              <% end %>
+            </li>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!--sgg15 -->
+  <% if student_logged_in? or  teacher_logged_in?%>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+
+        <% if teacher_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#CourseCollapse"><span class="glyphicon glyphicon-user"></span>
+              课程管理</a>
+        <% end %>
+
+        <% if student_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#CourseCollapse"><span class="glyphicon glyphicon-user"></span>
+              选修课程</a>
+        <% end %>
+
+      </h4>
+    </div>
+
+   <!--sgg5 1line -->
+    <div id="CourseCollapse" class="panel-collapse collapse <%= "in" if ["courses"].include?(params[:controller])&&(!request.url.include?"courses/evaluation_index")&&(!request.url.include?"feedback") %>">
+      <ul class="list-group">
+
+        <% if teacher_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 已授课程
+                  <span class="label label-info pull-right"><%= current_user.teaching_courses.count %></span>
+              <% end %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to new_course_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 创建新课程
+              <% end %>
+            </li>
+        <% end %>
+
+        <% if student_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to list_courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 选修课程
+                  <span class="label label-info pull-right"><%= (Course.where(:open => true)-current_user.courses).count %></span>
+              <% end %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 已选课程
+                  <span class="label label-info pull-right"><%= current_user.courses.count %></span>
+              <% end %>
+            </li>
+            <!-- xzh -->
+              <li class="list-group-item">
+              <%= link_to st_courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 我的课表
+              <% end %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to totalcredit_courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 选课学分提示
+              <% end %>
+            </li>
+            
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <% if teacher_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#GradeCollapse"><span class="glyphicon glyphicon-user"></span>
+              成绩管理</a>
+        <% end %>
+
+        <% if student_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#GradeCollapse"><span class="glyphicon glyphicon-user"></span>
+              所有成绩</a>
+        <% end %>
+      </h4>
+    </div>
+
+    <div id="GradeCollapse" class="panel-collapse collapse <%= "in" if ["grades"].include?(params[:controller]) %>">
+      <div class="list-group">
+
+        <% if teacher_logged_in? %>
+            <% current_user.teaching_courses.each do |course| %>
+                <li class="list-group-item">
+                  <%= link_to grades_path(course_id: course.id), :method => :get do %>
+                      <span class="glyphicon glyphicon-chevron-right"></span> <%= course.name %>
+                      <span class="label label-info pull-right"><%= course.users.length %></span>
+                  <% end %>
+                </li>
+            <% end %>
+
+        <% end %>
+
+        <% if student_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to grades_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 所有成绩
+              <% end %>
+            </li>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
+  <% end %>
+  <!--sgg15 end -->
+
+
+
+  <!--sgg2 -->
+  <% if student_logged_in? %>
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <% if student_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationCollapse"><span class="glyphicon glyphicon-user"></span>
+              课程评估</a>
+        <% end %>
+      </h4>
+    </div>
+    
+    <div id="EvaluationCollapse" class="panel-collapse collapse <%= "in" if request.url.include?"courses/evaluation_index" or 
+    (request.url.include?"edit" and request.url.include?"evaluations") %>">
+
+      <ul class="list-group">
+        <% if student_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to evaluation_index_courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 当前学期课程评估
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div> 
+  <% end %>
+  <!--sgg2 end-->
+
+  <!--sgg16-->
+  <% if admin_logged_in? %>
+  <div class="panel panel-default"> 
+    <div class="panel-heading">
+      <h4 class="panel-title"> 
+        <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationResultsCollapse"><span class="glyphicon glyphicon-user"></span>
+        课程评估结果</a>
+      </h4>
+    </div>
+
+    <div id="EvaluationResultsCollapse" class="panel-collapse collapse <%= "in" if request.url.include?"evaluations" %>">
+
+      <ul class="list-group">
+          <li class="list-group-item">
+              <%= link_to evaluations_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 当前学期课程评估结果
+              <% end %>
+          </li>
+      </ul>
+    </div>
+
+  </div>
+  <% end %>
+  <!--sgg16 end-->
+
+  <!--sgg21 -->
+  <% if teacher_logged_in? %>
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <% if teacher_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationTeacherCollapse"><span class="glyphicon glyphicon-user"></span>
+              课程评估反馈</a>
+        <% end %>
+      </h4>
+    </div>
+    
+    <div id="EvaluationTeacherCollapse" class="panel-collapse collapse <%= "in" if request.url.include?"feedback" or request.url.include?"result" %>">
+
+      <ul class="list-group">
+        <% if teacher_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to feedback_index_courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 当前学期课程评估反馈
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div> 
+  <% end %>
+  <!--sgg21 end-->
+</div>
