@@ -17,7 +17,7 @@ class NoticesController < ApplicationController
     @notice.course_name = Course.find_by_id(@notice.course_id).name
     if @notice.save
 
-      redirect_to notices_path, flash: {success: "新通知已发布"}
+      redirect_to notices_path, flash: {info: "新通知已发布"}
     else
       flash[:warning] = "信息填写有误,请重试"
       render 'new'
@@ -42,7 +42,7 @@ class NoticesController < ApplicationController
     @notice=Notice.find_by_id(params[:id])
     # current_user.teaching_courses.delete(@notice)
     @notice.destroy
-    flash={:success => "成功删除课程通知: #{@notice.theme}"}
+    flash={:info => "成功删除课程通知: #{@notice.theme}"}
     redirect_to notices_path, flash: flash
   end
 

@@ -1,7 +1,7 @@
 <div class="panel-group" id="accordion">
 
-
-<div class="panel panel-default">
+  <% if student_logged_in? or  teacher_logged_in?%>
+  <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
 
@@ -42,6 +42,7 @@
       </div>
     </div>
   </div>
+  <% end %>
   <!--sgg15 -->
   <% if student_logged_in? or  teacher_logged_in?%>
   <div class="panel panel-default">

@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
     if @course.save
       current_user.teaching_courses<<@course
-      redirect_to courses_path, flash: {success: "新课程申请成功"}
+      redirect_to courses_path, flash: {info: "新课程申请成功"}
     else
       flash[:warning] = "信息填写有误,请重试"
       render 'new'
@@ -40,20 +40,20 @@ class CoursesController < ApplicationController
     @course=Course.find_by_id(params[:id])
     @course.update_attributes(open: true)
     @course.update_attributes(student_num: 0)
-    redirect_to courses_path, flash: {:success => "已经成功开启该课程:#{ @course.name}"}
+    redirect_to courses_path, flash: {:info => "已经成功开启该课程:#{ @course.name}"}
   end
 
   def close
     @course=Course.find_by_id(params[:id])
     @course.update_attributes(open: false)
-    redirect_to courses_path, flash: {:success => "已经成功关闭该课程:#{ @course.name}"}
+    redirect_to courses_path, flash: {:info => "已经成功关闭该课程:#{ @course.name}"}
   end
 
   def destroy
     @course=Course.find_by_id(params[:id])
     current_user.teaching_courses.delete(@course)
     @course.destroy
-    flash={:success => "成功删除课程: #{@course.name}"}
+    flash={:info => "成功删除课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
   end
 
@@ -184,7 +184,7 @@ class CoursesController < ApplicationController
       end
     end
     if k != 0
-        flash={:suceess => "#{@course.name}  与已选课程时间冲突"}
+        flash={:info => "#{@course.name}  与已选课程时间冲突"}
         redirect_to list_courses_path, flash: flash
     else
     tmp = 0
@@ -203,7 +203,7 @@ class CoursesController < ApplicationController
       @grade.update_attributes(degree: 1)        
     end
 
-    flash={:success => "成功选择课程: #{@course.name}"}
+    flash={:info => "成功选择课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
     end
   end
@@ -215,7 +215,7 @@ class CoursesController < ApplicationController
     tmp = @course.student_num
     tmp -= 1 
     @course.update_attributes(student_num: tmp) 
-    flash={:success => "成功退选课程: #{@course.name}"}
+    flash={:info => "成功退选课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
   end
 

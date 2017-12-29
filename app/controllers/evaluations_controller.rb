@@ -20,7 +20,7 @@ class EvaluationsController < ApplicationController
             insert_record(current_user.id,@course.id,7,params[:score7].to_i)
             insert_record(current_user.id,@course.id,8,params[:score8].to_i)
 
-            flash[:success] = "评估成功!"
+            flash[:info] = "评估成功!"
             redirect_to evaluation_index_courses_path
 		end
 
@@ -155,12 +155,12 @@ class EvaluationsController < ApplicationController
   def openfeedback
     @course=Course.find_by_id(params[:id])
     @course.update_attributes(:isopen=>"1")
-    redirect_to evaluations_path,flash: {success: "开通教师查看权限成功!"}
+    redirect_to evaluations_path,flash: {info: "开通教师查看权限成功!"}
   end 
 
   def closefeedback
     @course=Course.find_by_id(params[:id])
     @course.update_attributes(:isopen=>"0")
-    redirect_to evaluations_path,flash: {success: "关闭教师查看权限成功!"}
+    redirect_to evaluations_path,flash: {info: "关闭教师查看权限成功!"}
   end
 end
