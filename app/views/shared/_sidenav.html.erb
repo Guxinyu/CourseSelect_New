@@ -6,13 +6,13 @@
       <h4 class="panel-title">
 
         <% if teacher_logged_in? %>
-            <a data-toggle="collapse" data-parent="#accordion" href="#NoticeCollapse"><span class="glyphicon glyphicon-user"></span>
+            <a data-toggle="collapse" data-parent="#accordion" href="#NoticeCollapse"><span class="glyphicon glyphicon-volume-up"></span>
               发布通知</a>
         <% end %>
 
         <% if student_logged_in? %>
-            <a data-toggle="collapse" data-parent="#accordion" href="#NoticeCollapse"><span class="glyphicon glyphicon-user"></span>
-              所有通知</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#NoticeCollapse"><span class="glyphicon glyphicon-envelope"></span>
+              我的通知</a>
         <% end %>
       </h4>
     </div>
@@ -50,12 +50,12 @@
       <h4 class="panel-title">
 
         <% if teacher_logged_in? %>
-            <a data-toggle="collapse" data-parent="#accordion" href="#CourseCollapse"><span class="glyphicon glyphicon-user"></span>
+            <a data-toggle="collapse" data-parent="#accordion" href="#CourseCollapse"><span class="glyphicon glyphicon-book"></span>
               课程管理</a>
         <% end %>
 
         <% if student_logged_in? %>
-            <a data-toggle="collapse" data-parent="#accordion" href="#CourseCollapse"><span class="glyphicon glyphicon-user"></span>
+            <a data-toggle="collapse" data-parent="#accordion" href="#CourseCollapse"><span class="glyphicon glyphicon-tasks"></span>
               选修课程</a>
         <% end %>
 
@@ -83,7 +83,7 @@
         <% if student_logged_in? %>
             <li class="list-group-item">
               <%= link_to list_courses_path do %>
-                  <span class="glyphicon glyphicon-chevron-right"></span> 选修课程
+                  <span class="glyphicon glyphicon-chevron-right"></span> 选择课程
                   <span class="label label-info pull-right"><%= (Course.where(:open => true)-current_user.courses).count %></span>
               <% end %>
             </li>
@@ -114,12 +114,12 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <% if teacher_logged_in? %>
-            <a data-toggle="collapse" data-parent="#accordion" href="#GradeCollapse"><span class="glyphicon glyphicon-user"></span>
+            <a data-toggle="collapse" data-parent="#accordion" href="#GradeCollapse"><span class="glyphicon glyphicon-stats"></span>
               成绩管理</a>
         <% end %>
 
         <% if student_logged_in? %>
-            <a data-toggle="collapse" data-parent="#accordion" href="#GradeCollapse"><span class="glyphicon glyphicon-user"></span>
+            <a data-toggle="collapse" data-parent="#accordion" href="#GradeCollapse"><span class="glyphicon glyphicon-stats"></span>
               所有成绩</a>
         <% end %>
       </h4>
@@ -164,7 +164,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <% if student_logged_in? %>
-            <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationCollapse"><span class="glyphicon glyphicon-user"></span>
+            <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationCollapse"><span class="glyphicon glyphicon-list-alt"></span>
               课程评估</a>
         <% end %>
       </h4>
@@ -192,8 +192,8 @@
   <div class="panel panel-default"> 
     <div class="panel-heading">
       <h4 class="panel-title"> 
-        <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationResultsCollapse"><span class="glyphicon glyphicon-user"></span>
-        课程评估结果</a>
+        <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationResultsCollapse"><span class="glyphicon glyphicon-list-alt"></span>
+        评估结果</a>
       </h4>
     </div>
 
@@ -202,7 +202,7 @@
       <ul class="list-group">
           <li class="list-group-item">
               <%= link_to evaluations_path do %>
-                  <span class="glyphicon glyphicon-chevron-right"></span> 当前学期课程评估结果
+                  <span class="glyphicon glyphicon-chevron-right"></span> 课程评估结果
               <% end %>
           </li>
       </ul>
@@ -219,8 +219,8 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <% if teacher_logged_in? %>
-            <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationTeacherCollapse"><span class="glyphicon glyphicon-user"></span>
-              课程评估反馈</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationTeacherCollapse"><span class="glyphicon glyphicon-list-alt"></span>
+              评估反馈</a>
         <% end %>
       </h4>
     </div>
@@ -231,7 +231,7 @@
         <% if teacher_logged_in? %>
             <li class="list-group-item">
               <%= link_to feedback_index_courses_path do %>
-                  <span class="glyphicon glyphicon-chevron-right"></span> 当前学期课程评估反馈
+                  <span class="glyphicon glyphicon-chevron-right"></span> 课程评估反馈
               <% end %>
             </li>
         <% end %>
