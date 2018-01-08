@@ -24,7 +24,7 @@
                <% @grade.each do |grade| %>
                   <% if @course.id == grade.course_id %>
                       <tr>
-                        <td><%= grade.user_id %></td>
+                        <td><%= grade.user.num %></td>
                         <% @department.each do |department| %>
                             <% if department.id == grade.user_id %>
                                    <td><%= department.name %></td>
