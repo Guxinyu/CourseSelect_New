@@ -47,7 +47,7 @@ class NoticesController < ApplicationController
   end
 
 
-#-------------------------for both teachers and students-------------------
+#---------------------for both teachers and students-------------------
  def index
   if params[:q].nil? or params[:q]==""
       if teacher_logged_in?
