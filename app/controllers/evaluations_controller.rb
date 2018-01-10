@@ -52,6 +52,41 @@ class EvaluationsController < ApplicationController
 
   end
 
+  #nskk1
+  def items
+    @evaluationitems=Evaluationitem.all.order("id ASC");
+  end
+
+  #nskk3
+  def itemupdate
+    if params[:evaluationitem][:itemcontent].nil? or params[:evaluationitem][:itemcontent]=="" or params[:evaluationitem][:itemcontent].lstrip==""
+      redirect_to items_evaluations_path, flash: {:danger => "评估项不能为空!"}
+    else
+      @Evaluationitem=Evaluationitem.find_by_id(params[:id])
+      @Evaluationitem.update_attributes(:itemcontent=>params[:evaluationitem][:itemcontent])
+      redirect_to items_evaluations_path,flash: {info: "修改评估项成功!"}
+    end
+  end
+
+  #nskk4
+  def itemdelete
+    @Evaluationitem=Evaluationitem.find_by_id(params[:id])
+    @Evaluationitem.destroy
+    redirect_to items_evaluations_path, flash: {:info => "成功删除!"}
+  end
+
+  #nskk5
+  def itemadd
+    if params[:itemcontent].nil? or params[:itemcontent]=="" or params[:itemcontent].lstrip==""
+      redirect_to items_evaluations_path, flash: {:danger => "评估项不能为空!"}
+    else
+      addevaluationitem=Evaluationitem.new
+      addevaluationitem.itemcontent= params[:itemcontent]
+      addevaluationitem.save 
+      redirect_to items_evaluations_path, flash: {:info => "成功增加评估项!"}
+    end
+  end
+
   #sgg15
   def result
     @course=Course.find_by_id(params[:id])

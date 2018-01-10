@@ -52,6 +52,13 @@ Rails.application.routes.draw do
       get :result
       get :openfeedback
       get :closefeedback
+      patch :itemupdate
+      delete :itemdelete
+      post :itemadd
+    end
+    #nskk2
+    collection do
+      get :items
     end
   end 
 
