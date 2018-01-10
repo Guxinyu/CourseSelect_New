@@ -193,7 +193,7 @@
     <div class="panel-heading">
       <h4 class="panel-title"> 
         <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationResultsCollapse"><span class="glyphicon glyphicon-list-alt"></span>
-        评估结果</a>
+        评估管理</a>
       </h4>
     </div>
 
@@ -202,7 +202,12 @@
       <ul class="list-group">
           <li class="list-group-item">
               <%= link_to evaluations_path do %>
-                  <span class="glyphicon glyphicon-chevron-right"></span> 课程评估结果
+                  <span class="glyphicon glyphicon-chevron-right"></span> 评估结果
+              <% end %>
+          </li>
+          <li class="list-group-item">
+              <%= link_to evaluations_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 修改评估项
               <% end %>
           </li>
       </ul>
