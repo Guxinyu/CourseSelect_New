@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :users
 
   #sgg9
+  #nskk2
   resources :evaluations do
     member do
       get :edit
@@ -56,7 +57,6 @@ Rails.application.routes.draw do
       delete :itemdelete
       post :itemadd
     end
-    #nskk2
     collection do
       get :items
     end

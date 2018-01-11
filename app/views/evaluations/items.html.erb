@@ -27,7 +27,7 @@
             <tbody style="font-size:16px;" >
 
               <% @evaluationitems.each do |item| %>     
-                <% if item.id==8 
+                <% if item.itemcontent=="总体评价" 
                    else %>
                 <tr>
                   <%= form_for item, url: itemupdate_evaluation_path(id: item.id), method: :patch do |f|%>

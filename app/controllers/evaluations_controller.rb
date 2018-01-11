@@ -1,39 +1,119 @@
 class EvaluationsController < ApplicationController
+
 	#sgg10
 	def edit
 	  @course=Course.find_by_id(params[:id])
-	end 
-	#sgg11
-	def insert
-        @course=Course.find_by_id(params[:id])
 
-		if params[:score1].nil? or params[:score2].nil? or params[:score3].nil? or params[:score4].nil? or params[:score5].nil? or params[:score6].nil? or params[:score7].nil? or params[:score8].nil?
-            flash[:danger] = "信息填写不全,请填写完整后再保存!"
-            redirect_to edit_evaluation_url(@course)
+    #nskk5
+    @itemscount=Evaluationitem.count
+    @itemsid=Array.new(@itemscount,0)
+    @itemscontent=Array.new(@itemscount,"评价项")
+
+    evaluationitems=Evaluationitem.all
+    i=0
+    index_last=0
+    evaluationitems.each do |e|
+        @itemsid[i]=e.id 
+        i=i+1
+        if e.itemcontent=="总体评价"
+          index_last=e.id
+        end
+    end
+    @itemsid.sort!
+    puts @itemsid
+    j=0
+    @itemsid.each do |i|
+        if i==index_last
+          break
         else 
-            insert_record(current_user.id,@course.id,1,params[:score1].to_i)
-            insert_record(current_user.id,@course.id,2,params[:score2].to_i)
-            insert_record(current_user.id,@course.id,3,params[:score3].to_i)
-            insert_record(current_user.id,@course.id,4,params[:score4].to_i)
-            insert_record(current_user.id,@course.id,5,params[:score5].to_i)
-            insert_record(current_user.id,@course.id,6,params[:score6].to_i)
-            insert_record(current_user.id,@course.id,7,params[:score7].to_i)
-            insert_record(current_user.id,@course.id,8,params[:score8].to_i)
+          j=j+1
+        end
+    end
+    
+    if j==@itemscount-1
+       puts @itemsid
+    else
+       for i in j..@itemscount-2
+        @itemsid[i]=@itemsid[i+1]
+       end
+       @itemsid[@itemscount-1]=index_last 
+       puts @itemsid
+    end
 
-            flash[:info] = "评估成功!"
-            redirect_to evaluation_index_courses_path
-		end
+    for k in 0..@itemscount-1
+       @itemscontent[k]=Evaluationitem.find_by_id(@itemsid[k]).itemcontent
+       puts @itemscontent[k]
+    end    
+        
+	end 
+
+	#sgg11
+  #nskk6
+	def insert
+    @course=Course.find_by_id(params[:id])
+
+    count=Evaluationitem.count
+    ids=Array.new(count,0)
+
+    evaluationitems=Evaluationitem.all
+    i=0
+    index_last=0
+    evaluationitems.each do |e|
+        ids[i]=e.id 
+        i=i+1
+        if e.itemcontent=="总体评价"
+          index_last=e.id
+        end
+    end
+    ids.sort!
+    puts ids
+    j=0
+    ids.each do |i|
+        if i==index_last
+          break
+        else 
+          j=j+1
+        end
+    end
+    if j==count-1
+       puts ids
+    else
+       for i in j..count-2
+         ids[i]=ids[i+1]
+       end
+       ids[count-1]=index_last 
+       puts ids
+    end
+
+
+    for i in 1..count
+      name=":score#{i}"
+      if params[name].nil?
+        flash[:danger] = "信息填写不全,请填写完整后再保存!"
+        redirect_to edit_evaluation_url(@course)
+        return
+      end
+    end 
+    
+		for k in 1..count
+       name=":score#{k}"
+       insert_record(current_user.id,@course.id,ids[k-1],params[name].to_i)
+    end
+
+    flash[:info] = "评估成功!"
+    redirect_to evaluation_index_courses_path 
 
 	end
 
 	#sgg12
-	def insert_record(user_id,course_id,item,score)
-        evaluation1=Evaluation.where(:user_id=>user_id,:course_id=>course_id,:item=>item).first
+  #nskk7
+	def insert_record(user_id,course_id,evaluationitem_id,score)
+        evaluation1=Evaluation.where(:user_id=>user_id,:course_id=>course_id,:evaluationitem_id=>evaluationitem_id).first
         if evaluation1.nil? 
           evaluation1=Evaluation.new
 		      evaluation1.user_id=user_id
           evaluation1.course_id=course_id
-          evaluation1.item=item
+          evaluation1.evaluationitem_id=evaluationitem_id
           evaluation1.score=score
           evaluation1.save                                           
         else
@@ -47,7 +127,20 @@ class EvaluationsController < ApplicationController
     if @selectcontent.nil? || @selectcontent.empty?
       @courses = Course.all.order("id ASC").paginate(page: params[:page], per_page: 8)
     else
-      @courses = Course.where(" name LIKE '%#{@selectcontent}%' ").all.paginate(page: params[:page], per_page: 4)
+      selectedusers=User.where(" name LIKE '%#{@selectcontent}%' and teacher=true").all
+      selectedusersids= Array.new
+      selectedusers.each do |s|
+        selectedusersids << s.id
+      end 
+      puts selectedusersids.length
+      
+      if selectedusersids.length==0
+         @courses = Course.where(" name LIKE '%#{@selectcontent}%' or course_code LIKE '%#{@selectcontent}%' ").all.paginate(page: params[:page], per_page: 4)
+      else 
+         ids=selectedusersids.join(',')
+         puts ids
+         @courses = Course.where(" name LIKE '%#{@selectcontent}%' or course_code LIKE '%#{@selectcontent}%' or teacher_id in (#{ids}) ").all.paginate(page: params[:page], per_page: 4)
+      end 
     end
 
   end
@@ -71,6 +164,11 @@ class EvaluationsController < ApplicationController
   #nskk4
   def itemdelete
     @Evaluationitem=Evaluationitem.find_by_id(params[:id])
+    evaluations_foritem=Evaluation.where(:evaluationitem_id=>@Evaluationitem.id).all
+    evaluations_foritem.each do |e|
+       e.destroy
+    end
+
     @Evaluationitem.destroy
     redirect_to items_evaluations_path, flash: {:info => "成功删除!"}
   end
@@ -91,57 +189,66 @@ class EvaluationsController < ApplicationController
   def result
     @course=Course.find_by_id(params[:id])
 
-    @label11=getLabelForItem(@course.id,1,1)
-    @label12=getLabelForItem(@course.id,1,2)
-    @label13=getLabelForItem(@course.id,1,3)
-    @label14=getLabelForItem(@course.id,1,4)
+    #nskk6
+    @itemscount=Evaluationitem.count
+    @itemsid=Array.new(@itemscount,0)
+    @itemscontent=Array.new(@itemscount,"评价项")
 
-    @label21=getLabelForItem(@course.id,2,1)
-    @label22=getLabelForItem(@course.id,2,2)
-    @label23=getLabelForItem(@course.id,2,3)
-    @label24=getLabelForItem(@course.id,2,4)
+    evaluationitems=Evaluationitem.all
+    i=0
+    index_last=0
+    evaluationitems.each do |e|
+        @itemsid[i]=e.id 
+        i=i+1
+        if e.itemcontent=="总体评价"
+          index_last=e.id
+        end
+    end
+    @itemsid.sort!
+    puts @itemsid
+    j=0
+    @itemsid.each do |i|
+        if i==index_last
+          break
+        else 
+          j=j+1
+        end
+    end
+    
+    if j==@itemscount-1
+       puts @itemsid
+    else
+       for i in j..@itemscount-2
+        @itemsid[i]=@itemsid[i+1]
+       end
+       @itemsid[@itemscount-1]=index_last 
+       puts @itemsid
+    end
 
-    @label31=getLabelForItem(@course.id,3,1)
-    @label32=getLabelForItem(@course.id,3,2)
-    @label33=getLabelForItem(@course.id,3,3)
-    @label34=getLabelForItem(@course.id,3,4)
+    for k in 0..@itemscount-1
+       @itemscontent[k]=Evaluationitem.find_by_id(@itemsid[k]).itemcontent
+       puts @itemscontent[k]
+    end    
+    
 
-    @label41=getLabelForItem(@course.id,4,1)
-    @label42=getLabelForItem(@course.id,4,2)
-    @label43=getLabelForItem(@course.id,4,3)
-    @label44=getLabelForItem(@course.id,4,4)
+    @labels=Array.new(@itemscount){Array.new(4,"0")} 
+    for h in 0..@itemscount-1
+      for g in 0..3
+        @labels[h][g]=getLabelForItem(@course.id,@itemsid[h],g+1)
+      end 
+    end 
 
-    @label51=getLabelForItem(@course.id,5,1)
-    @label52=getLabelForItem(@course.id,5,2)
-    @label53=getLabelForItem(@course.id,5,3)
-    @label54=getLabelForItem(@course.id,5,4)
-
-    @label61=getLabelForItem(@course.id,6,1)
-    @label62=getLabelForItem(@course.id,6,2)
-    @label63=getLabelForItem(@course.id,6,3)
-    @label64=getLabelForItem(@course.id,6,4)
-
-    @label71=getLabelForItem(@course.id,7,1)
-    @label72=getLabelForItem(@course.id,7,2)
-    @label73=getLabelForItem(@course.id,7,3)
-    @label74=getLabelForItem(@course.id,7,4)
-
-    @label81=getLabelForItem(@course.id,8,1)
-    @label82=getLabelForItem(@course.id,8,2)
-    @label83=getLabelForItem(@course.id,8,3)
-    @label84=getLabelForItem(@course.id,8,4)
-
-    @results=getNumForItem(@course.id,8)
+    @results=getNumForItem(@course.id,@itemsid[@itemscount-1])
 
 
   end
 
   #sgg16
   def getLabelForItem(course_id,item,score)
-    num1=Evaluation.where(:course_id=>course_id,:item=>item,:score=>1).count
-    num2=Evaluation.where(:course_id=>course_id,:item=>item,:score=>2).count
-    num3=Evaluation.where(:course_id=>course_id,:item=>item,:score=>3).count
-    num4=Evaluation.where(:course_id=>course_id,:item=>item,:score=>4).count
+    num1=Evaluation.where(:course_id=>course_id,:evaluationitem_id=>item,:score=>1).count
+    num2=Evaluation.where(:course_id=>course_id,:evaluationitem_id=>item,:score=>2).count
+    num3=Evaluation.where(:course_id=>course_id,:evaluationitem_id=>item,:score=>3).count
+    num4=Evaluation.where(:course_id=>course_id,:evaluationitem_id=>item,:score=>4).count
     count=num1+num2+num3+num4
     
 
@@ -171,10 +278,10 @@ class EvaluationsController < ApplicationController
 
   #sgg19
   def getNumForItem(course_id,item)
-    num1=Evaluation.where(:course_id=>course_id,:item=>item,:score=>1).count
-    num2=Evaluation.where(:course_id=>course_id,:item=>item,:score=>2).count
-    num3=Evaluation.where(:course_id=>course_id,:item=>item,:score=>3).count
-    num4=Evaluation.where(:course_id=>course_id,:item=>item,:score=>4).count
+    num1=Evaluation.where(:course_id=>course_id,:evaluationitem_id=>item,:score=>1).count
+    num2=Evaluation.where(:course_id=>course_id,:evaluationitem_id=>item,:score=>2).count
+    num3=Evaluation.where(:course_id=>course_id,:evaluationitem_id=>item,:score=>3).count
+    num4=Evaluation.where(:course_id=>course_id,:evaluationitem_id=>item,:score=>4).count
     count=num1+num2+num3+num4
     
     if count==0
