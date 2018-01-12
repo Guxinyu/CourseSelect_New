@@ -36,8 +36,7 @@
                   <td><%=@itemscontent[k-1]%></td>
                   <td>
                      <% name=":score#{k}"%>
-                     <% puts "%%%%%%%%%%%%%%%%%%%%%"%>
-                     <% puts @labels[k-1][0]%>
+
                      <%= radio_button_tag(name, "1") %>
                      <%= label_tag(:score1abel_1, "优"+@labels[k-1][0],:style=>"color:#FF6384;") %>          &nbsp&nbsp&nbsp
                      <%= radio_button_tag(name, "2") %>

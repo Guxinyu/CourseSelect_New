@@ -1,0 +1,508 @@
+  [1m[36m (30.1ms)[0m  [1mDROP DATABASE IF EXISTS "courseselect_test"[0m
+  [1m[36m (136.6ms)[0m  [1mDROP DATABASE IF EXISTS "courseselect_test"[0m
+  [1m[35m (1.0ms)[0m  CREATE DATABASE "courseselect_test" ENCODING = 'unicode'
+  [1m[36m (0.3ms)[0m  [1mDROP DATABASE IF EXISTS "courseselect_test"[0m
+  [1m[36m (5036.5ms)[0m  [1mDROP DATABASE IF EXISTS "courseselect_test"[0m
+  [1m[36m (5051.7ms)[0m  [1mDROP DATABASE IF EXISTS "courseselect_test"[0m
+  [1m[36m (132.0ms)[0m  [1mDROP DATABASE IF EXISTS "courseselect_test"[0m
+  [1m[35m (0.4ms)[0m  CREATE DATABASE "courseselect_test" ENCODING = 'unicode'
+  [1m[36m (108.6ms)[0m  [1mDROP DATABASE IF EXISTS "courseselect_test"[0m
+  [1m[35m (0.5ms)[0m  CREATE DATABASE "courseselect_test" ENCODING = 'unicode'
+  [1m[36m (114.1ms)[0m  [1mDROP DATABASE IF EXISTS "courseselect_test"[0m
+  [1m[35m (0.9ms)[0m  CREATE DATABASE "courseselect_test" ENCODING = 'unicode'
+  [1m[36m (0.4ms)[0m  [1mDROP DATABASE IF EXISTS "courseselect_test"[0m
+  [1m[36m (59.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (5.5ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20160818081955)
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (13.9ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "email" character varying, "num" character varying, "major" character varying, "department" character varying, "password_digest" character varying, "remember_digest" character varying, "admin" boolean DEFAULT 'f', "teacher" boolean DEFAULT 'f', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.0ms)[0m  CREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160818081955"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+Migrating to CreateCourses (20160907152104)
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35m (13.4ms)[0m  CREATE TABLE "courses" ("id" serial primary key, "name" character varying, "course_code" character varying, "course_type" character varying, "teaching_type" character varying, "exam_type" character varying, "credit" character varying, "limit_num" integer, "student_num" integer DEFAULT 0, "class_room" character varying, "course_time" character varying, "course_week" character varying, "teacher_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160907152104"]]
+  [1m[35m (3.2ms)[0m  COMMIT
+Migrating to CreateGrades (20160909105514)
+  [1m[36m (0.6ms)[0m  [1mBEGIN[0m
+  [1m[35m (8.4ms)[0m  CREATE TABLE "grades" ("id" serial primary key, "course_id" integer, "user_id" integer, "grade" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (6.0ms)[0m  [1mCREATE  INDEX  "index_grades_on_course_id" ON "grades"  ("course_id")[0m
+  [1m[35m (4.6ms)[0m  CREATE  INDEX  "index_grades_on_user_id" ON "grades"  ("user_id")
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160909105514"]]
+  [1m[35m (1.6ms)[0m  COMMIT
+Migrating to AddCourseAttribute (20161109084337)
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35m (38.0ms)[0m  ALTER TABLE "courses" ADD "open" boolean DEFAULT 'f'
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20161109084337"]]
+  [1m[35m (2.7ms)[0m  COMMIT
+Migrating to AddTestToCourses (20171207110343)
+  [1m[36m (2.5ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.1ms)[0m  ALTER TABLE "courses" ADD "test" character varying
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20171207110343"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+Migrating to AddDegreeToGrades (20171213090147)
+  [1m[36m (1.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (7.7ms)[0m  ALTER TABLE "grades" ADD "degree" character varying
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20171213090147"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+Migrating to CreateEvaluations (20171220093830)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (4.4ms)[0m  CREATE TABLE "evaluations" ("id" serial primary key, "item" integer, "score" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20171220093830"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+Migrating to AddUserRefToEvaluations (20171220093900)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "evaluations" ADD "user_id" integer
+  [1m[36m (2.4ms)[0m  [1mCREATE  INDEX  "index_evaluations_on_user_id" ON "evaluations"  ("user_id")[0m
+  [1m[35m (2.2ms)[0m  ALTER TABLE "evaluations" ADD CONSTRAINT "fk_rails_ef42eba623"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20171220093900"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+Migrating to AddCourseRefToEvaluations (20171220093913)
+  [1m[36m (0.7ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "evaluations" ADD "course_id" integer
+  [1m[36m (2.2ms)[0m  [1mCREATE  INDEX  "index_evaluations_on_course_id" ON "evaluations"  ("course_id")[0m
+  [1m[35m (1.0ms)[0m  ALTER TABLE "evaluations" ADD CONSTRAINT "fk_rails_b85f1dd897"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20171220093913"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+Migrating to AddIsOpenToCourses (20171220093959)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "courses" ADD "isopen" character varying
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20171220093959"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+Migrating to CreateNotices (20171220144005)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (8.6ms)[0m  CREATE TABLE "notices" ("id" serial primary key, "theme" character varying, "content" character varying, "publish_time" character varying, "course_name" character varying, "course_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20171220144005"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+Migrating to CreateEvaluationitems (20180110020850)
+  [1m[36m (0.7ms)[0m  [1mBEGIN[0m
+  [1m[35m (5.9ms)[0m  CREATE TABLE "evaluationitems" ("id" serial primary key, "itemcontent" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20180110020850"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to AddEvaluationitemRefToEvaluations (20180110122608)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "evaluations" ADD "evaluationitem_id" integer
+  [1m[36m (1.6ms)[0m  [1mCREATE  INDEX  "index_evaluations_on_evaluationitem_id" ON "evaluations"  ("evaluationitem_id")[0m
+  [1m[35m (0.9ms)[0m  ALTER TABLE "evaluations" ADD CONSTRAINT "fk_rails_8a6afa6f14"
+FOREIGN KEY ("evaluationitem_id")
+  REFERENCES "evaluationitems" ("id")
+
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20180110122608"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.0ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'courses'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.8ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'evaluationitems'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'evaluations'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.1ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'grades'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'notices'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.5ms)[0m  ALTER TABLE "grades" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "notices" DISABLE TRIGGER ALL;ALTER TABLE "evaluationitems" DISABLE TRIGGER ALL;ALTER TABLE "evaluations" DISABLE TRIGGER ALL
+  [1m[36m (1.2ms)[0m  [1mALTER TABLE "grades" DISABLE TRIGGER USER;ALTER TABLE "schema_migrations" DISABLE TRIGGER USER;ALTER TABLE "courses" DISABLE TRIGGER USER;ALTER TABLE "users" DISABLE TRIGGER USER;ALTER TABLE "notices" DISABLE TRIGGER USER;ALTER TABLE "evaluationitems" DISABLE TRIGGER USER;ALTER TABLE "evaluations" DISABLE TRIGGER USER[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.4ms)[0m  [1mDELETE FROM "evaluationitems"[0m
+  [1m[35mFixture Insert (12.5ms)[0m  INSERT INTO "evaluationitems" ("itemcontent", "created_at", "updated_at", "id") VALUES ('MyString', '2018-01-12 12:49:22', '2018-01-12 12:49:22', 980190962)
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "evaluationitems" ("itemcontent", "created_at", "updated_at", "id") VALUES ('MyString', '2018-01-12 12:49:22', '2018-01-12 12:49:22', 298486374)[0m
+  [1m[35mFixture Delete (0.4ms)[0m  DELETE FROM "courses"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "courses" ("created_at", "updated_at", "id") VALUES ('2018-01-12 12:49:22', '2018-01-12 12:49:22', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "courses" ("created_at", "updated_at", "id") VALUES ('2018-01-12 12:49:22', '2018-01-12 12:49:22', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "notices"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "notices" ("theme", "content", "publish_time", "course_name", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', '2018-01-12 12:49:22', '2018-01-12 12:49:22', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "notices" ("theme", "content", "publish_time", "course_name", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', '2018-01-12 12:49:22', '2018-01-12 12:49:22', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "evaluations"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "evaluations" ("item", "score", "created_at", "updated_at", "id") VALUES (1, 1, '2018-01-12 12:49:22', '2018-01-12 12:49:22', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "evaluations" ("item", "score", "created_at", "updated_at", "id") VALUES (1, 1, '2018-01-12 12:49:22', '2018-01-12 12:49:22', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "id") VALUES ('彭兆卿', 'admin@test.com', '$2a$04$BS0NfbCG/hHxXbgZkjzKv.But5X6TdoGHi3H34CFG4KAnBP9Jkiee', '2018-01-12 12:49:22', '2018-01-12 12:49:22', 751813785)
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "grades" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "notices" ENABLE TRIGGER ALL;ALTER TABLE "evaluationitems" ENABLE TRIGGER ALL;ALTER TABLE "evaluations" ENABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "grades" ENABLE TRIGGER USER;ALTER TABLE "schema_migrations" ENABLE TRIGGER USER;ALTER TABLE "courses" ENABLE TRIGGER USER;ALTER TABLE "users" ENABLE TRIGGER USER;ALTER TABLE "notices" ENABLE TRIGGER USER;ALTER TABLE "evaluationitems" ENABLE TRIGGER USER;ALTER TABLE "evaluations" ENABLE TRIGGER USER[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------------
+UserLoginTest: test_login_with_valid_information
+------------------------------------------------
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 751813785]]
+Started GET "/sessions/login" for 127.0.0.1 at 2018-01-12 20:49:22 +0800
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (23.2ms)
+  Rendered layouts/_header.html.erb (4.0ms)
+  Rendered layouts/_content.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 13300ms (Views: 13281.6ms | ActiveRecord: 0.0ms)
+Started POST "/sessions/login?session%5Bemail%5D=admin%40test.com&session%5Bpassword%5D=[FILTERED]" for 127.0.0.1 at 2018-01-12 20:49:36 +0800
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"admin@test.com", "password"=>"[FILTERED]"}}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1  [["email", "admin@test.com"]]
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/
+Completed 302 Found in 18ms (ActiveRecord: 1.2ms)
+Started GET "/" for 127.0.0.1 at 2018-01-12 20:49:36 +0800
+Processing by HomesController#index as HTML
+  Rendered homes/index.html.erb within layouts/application (7.9ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 751813785]]
+  Rendered layouts/_header.html.erb (2.1ms)
+  Rendered layouts/_content.html.erb (0.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 24ms (Views: 22.4ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------------------------------------------------------------
+UserTest: test_email_addresses_should_be_unique_and_the_uppercase_will_be_converted_to_lowercase
+------------------------------------------------------------------------------------------------
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (1.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Example User"], ["email", "user@example.com"], ["password_digest", "$2a$04$cL51OGTlc9ePHZJPaJloiuz/wHvNlH4.KGk1xfYiUV6/oo0Zp.No6"], ["created_at", "2018-01-12 12:49:36.502263"], ["updated_at", "2018-01-12 12:49:36.502263"]]
+  [1m[36m (0.4ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.6ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('USER@EXAMPLE.COM') LIMIT 1
+  [1m[36m (0.7ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+-------------------------------------------------------------
+UserTest: test_email_validation_should_accept_valid_addresses
+-------------------------------------------------------------
+  [1m[36mUser Exists (0.8ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.9ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('USER@foo.COM') LIMIT 1
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('A_US-ER@foo.bar.org') LIMIT 1[0m
+  [1m[35mUser Exists (0.6ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('first.last@foo.jp') LIMIT 1
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('alice+bob@baz.cn') LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+------------------------------
+UserTest: test_should_be_valid
+------------------------------
+  [1m[35mUser Exists (0.6ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+------------------------------------------
+UserTest: test_name_should_not_be_too_long
+------------------------------------------
+  [1m[36mUser Exists (1.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+--------------------------------------
+UserTest: test_email_should_be_present
+--------------------------------------
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('     ') LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-------------------------------------------
+UserTest: test_email_should_not_be_too_long
+-------------------------------------------
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com') LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+-------------------------------------
+UserTest: test_name_should_be_present
+-------------------------------------
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------
+SiteLayoutTest: test_homepage_layout_links
+------------------------------------------
+Started GET "/" for 127.0.0.1 at 2018-01-12 20:49:37 +0800
+Processing by HomesController#index as HTML
+  Rendered homes/index.html.erb within layouts/application (1.3ms)
+  Rendered layouts/_header.html.erb (0.4ms)
+  Rendered layouts/_content.html.erb (0.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 3ms (Views: 3.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "grades" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "notices" DISABLE TRIGGER ALL;ALTER TABLE "evaluationitems" DISABLE TRIGGER ALL;ALTER TABLE "evaluations" DISABLE TRIGGER ALL
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "grades" DISABLE TRIGGER USER;ALTER TABLE "schema_migrations" DISABLE TRIGGER USER;ALTER TABLE "courses" DISABLE TRIGGER USER;ALTER TABLE "users" DISABLE TRIGGER USER;ALTER TABLE "notices" DISABLE TRIGGER USER;ALTER TABLE "evaluationitems" DISABLE TRIGGER USER;ALTER TABLE "evaluations" DISABLE TRIGGER USER[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.9ms)[0m  [1mDELETE FROM "evaluationitems"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "evaluationitems" ("itemcontent", "created_at", "updated_at", "id") VALUES ('MyString', '2018-01-12 13:41:15', '2018-01-12 13:41:15', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "evaluationitems" ("itemcontent", "created_at", "updated_at", "id") VALUES ('MyString', '2018-01-12 13:41:15', '2018-01-12 13:41:15', 298486374)[0m
+  [1m[35mFixture Delete (0.7ms)[0m  DELETE FROM "courses"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "courses" ("created_at", "updated_at", "id") VALUES ('2018-01-12 13:41:15', '2018-01-12 13:41:15', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "courses" ("created_at", "updated_at", "id") VALUES ('2018-01-12 13:41:15', '2018-01-12 13:41:15', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "notices"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "notices" ("theme", "content", "publish_time", "course_name", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', '2018-01-12 13:41:15', '2018-01-12 13:41:15', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "notices" ("theme", "content", "publish_time", "course_name", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', '2018-01-12 13:41:15', '2018-01-12 13:41:15', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "evaluations"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "evaluations" ("item", "score", "created_at", "updated_at", "id") VALUES (1, 1, '2018-01-12 13:41:15', '2018-01-12 13:41:15', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "evaluations" ("item", "score", "created_at", "updated_at", "id") VALUES (1, 1, '2018-01-12 13:41:15', '2018-01-12 13:41:15', 298486374)
+  [1m[36mFixture Delete (0.5ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "id") VALUES ('彭兆卿', 'admin@test.com', '$2a$04$HN7yNkwSRHTQjwCsT1PPke7ILJpt686jdZLnUP0OXzJsM9QjAKAaG', '2018-01-12 13:41:15', '2018-01-12 13:41:15', 751813785)
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "grades" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "notices" ENABLE TRIGGER ALL;ALTER TABLE "evaluationitems" ENABLE TRIGGER ALL;ALTER TABLE "evaluations" ENABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "grades" ENABLE TRIGGER USER;ALTER TABLE "schema_migrations" ENABLE TRIGGER USER;ALTER TABLE "courses" ENABLE TRIGGER USER;ALTER TABLE "users" ENABLE TRIGGER USER;ALTER TABLE "notices" ENABLE TRIGGER USER;ALTER TABLE "evaluationitems" ENABLE TRIGGER USER;ALTER TABLE "evaluations" ENABLE TRIGGER USER[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-------------------------------------------
+UserTest: test_email_should_not_be_too_long
+-------------------------------------------
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com') LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+------------------------------
+UserTest: test_should_be_valid
+------------------------------
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------------------------------------------------------------
+UserTest: test_email_addresses_should_be_unique_and_the_uppercase_will_be_converted_to_lowercase
+------------------------------------------------------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Example User"], ["email", "user@example.com"], ["password_digest", "$2a$04$9p6Jxz6urtng3MpgIvxB/O.oafEOGjdzmk/P/mydG9xBuNAvdRwoO"], ["created_at", "2018-01-12 13:41:15.642487"], ["updated_at", "2018-01-12 13:41:15.642487"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('USER@EXAMPLE.COM') LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+-------------------------------------------------------------
+UserTest: test_email_validation_should_accept_valid_addresses
+-------------------------------------------------------------
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('USER@foo.COM') LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('A_US-ER@foo.bar.org') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('first.last@foo.jp') LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('alice+bob@baz.cn') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------
+UserTest: test_name_should_not_be_too_long
+------------------------------------------
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+--------------------------------------
+UserTest: test_email_should_be_present
+--------------------------------------
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('     ') LIMIT 1
+  [1m[36m (1.5ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-------------------------------------
+UserTest: test_name_should_be_present
+-------------------------------------
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+SiteLayoutTest: test_homepage_layout_links
+------------------------------------------
+Started GET "/" for 127.0.0.1 at 2018-01-12 21:41:15 +0800
+Processing by HomesController#index as HTML
+  Rendered homes/index.html.erb within layouts/application (352.3ms)
+  Rendered layouts/_header.html.erb (3.7ms)
+  Rendered layouts/_content.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 387ms (Views: 379.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------------
+UserLoginTest: test_login_with_valid_information
+------------------------------------------------
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 751813785]]
+Started GET "/sessions/login" for 127.0.0.1 at 2018-01-12 21:41:16 +0800
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (5.0ms)
+  Rendered layouts/_header.html.erb (0.4ms)
+  Rendered layouts/_content.html.erb (0.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 11ms (Views: 10.8ms | ActiveRecord: 0.0ms)
+Started POST "/sessions/login?session%5Bemail%5D=admin%40test.com&session%5Bpassword%5D=[FILTERED]" for 127.0.0.1 at 2018-01-12 21:41:16 +0800
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"admin@test.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1[0m  [["email", "admin@test.com"]]
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 14ms (ActiveRecord: 2.9ms)
+Started GET "/" for 127.0.0.1 at 2018-01-12 21:41:16 +0800
+Processing by HomesController#index as HTML
+  Rendered homes/index.html.erb within layouts/application (1.4ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 751813785]]
+  Rendered layouts/_header.html.erb (1.7ms)
+  Rendered layouts/_content.html.erb (0.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.4ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "grades" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "notices" DISABLE TRIGGER ALL;ALTER TABLE "evaluationitems" DISABLE TRIGGER ALL;ALTER TABLE "evaluations" DISABLE TRIGGER ALL
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "grades" DISABLE TRIGGER USER;ALTER TABLE "schema_migrations" DISABLE TRIGGER USER;ALTER TABLE "courses" DISABLE TRIGGER USER;ALTER TABLE "users" DISABLE TRIGGER USER;ALTER TABLE "notices" DISABLE TRIGGER USER;ALTER TABLE "evaluationitems" DISABLE TRIGGER USER;ALTER TABLE "evaluations" DISABLE TRIGGER USER[0m
+  [1m[35m (1.5ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.6ms)[0m  [1mDELETE FROM "evaluationitems"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "evaluationitems" ("itemcontent", "created_at", "updated_at", "id") VALUES ('MyString', '2018-01-12 13:41:31', '2018-01-12 13:41:31', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "evaluationitems" ("itemcontent", "created_at", "updated_at", "id") VALUES ('MyString', '2018-01-12 13:41:31', '2018-01-12 13:41:31', 298486374)[0m
+  [1m[35mFixture Delete (0.7ms)[0m  DELETE FROM "courses"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "courses" ("created_at", "updated_at", "id") VALUES ('2018-01-12 13:41:31', '2018-01-12 13:41:31', 980190962)[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "courses" ("created_at", "updated_at", "id") VALUES ('2018-01-12 13:41:31', '2018-01-12 13:41:31', 298486374)
+  [1m[36mFixture Delete (0.5ms)[0m  [1mDELETE FROM "notices"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "notices" ("theme", "content", "publish_time", "course_name", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', '2018-01-12 13:41:31', '2018-01-12 13:41:31', 980190962)
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "notices" ("theme", "content", "publish_time", "course_name", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', '2018-01-12 13:41:31', '2018-01-12 13:41:31', 298486374)[0m
+  [1m[35mFixture Delete (0.6ms)[0m  DELETE FROM "evaluations"
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "evaluations" ("item", "score", "created_at", "updated_at", "id") VALUES (1, 1, '2018-01-12 13:41:31', '2018-01-12 13:41:31', 980190962)[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "evaluations" ("item", "score", "created_at", "updated_at", "id") VALUES (1, 1, '2018-01-12 13:41:31', '2018-01-12 13:41:31', 298486374)
+  [1m[36mFixture Delete (1.7ms)[0m  [1mDELETE FROM "users"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "id") VALUES ('彭兆卿', 'admin@test.com', '$2a$04$ZPqsZaZWBwACwHKx1zawveF2Oal3kolrYNKzG6Ra4D98ebxEZ57nO', '2018-01-12 13:41:31', '2018-01-12 13:41:31', 751813785)
+  [1m[36m (3.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "grades" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "notices" ENABLE TRIGGER ALL;ALTER TABLE "evaluationitems" ENABLE TRIGGER ALL;ALTER TABLE "evaluations" ENABLE TRIGGER ALL
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "grades" ENABLE TRIGGER USER;ALTER TABLE "schema_migrations" ENABLE TRIGGER USER;ALTER TABLE "courses" ENABLE TRIGGER USER;ALTER TABLE "users" ENABLE TRIGGER USER;ALTER TABLE "notices" ENABLE TRIGGER USER;ALTER TABLE "evaluationitems" ENABLE TRIGGER USER;ALTER TABLE "evaluations" ENABLE TRIGGER USER[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------------
+UserLoginTest: test_login_with_valid_information
+------------------------------------------------
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 751813785]]
+Started GET "/sessions/login" for 127.0.0.1 at 2018-01-12 21:41:31 +0800
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (5.4ms)
+  Rendered layouts/_header.html.erb (4.3ms)
+  Rendered layouts/_content.html.erb (0.6ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 324ms (Views: 316.8ms | ActiveRecord: 0.0ms)
+Started POST "/sessions/login?session%5Bemail%5D=admin%40test.com&session%5Bpassword%5D=[FILTERED]" for 127.0.0.1 at 2018-01-12 21:41:31 +0800
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"admin@test.com", "password"=>"[FILTERED]"}}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1  [["email", "admin@test.com"]]
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/
+Completed 302 Found in 7ms (ActiveRecord: 0.6ms)
+Started GET "/" for 127.0.0.1 at 2018-01-12 21:41:31 +0800
+Processing by HomesController#index as HTML
+  Rendered homes/index.html.erb within layouts/application (3.8ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 751813785]]
+  Rendered layouts/_header.html.erb (2.8ms)
+  Rendered layouts/_content.html.erb (0.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 14ms (Views: 12.9ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------
+UserTest: test_should_be_valid
+------------------------------
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-------------------------------------------------------------
+UserTest: test_email_validation_should_accept_valid_addresses
+-------------------------------------------------------------
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('USER@foo.COM') LIMIT 1
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('A_US-ER@foo.bar.org') LIMIT 1[0m
+  [1m[35mUser Exists (2.0ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('first.last@foo.jp') LIMIT 1
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('alice+bob@baz.cn') LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+-------------------------------------
+UserTest: test_name_should_be_present
+-------------------------------------
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+--------------------------------------
+UserTest: test_email_should_be_present
+--------------------------------------
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('     ') LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+-------------------------------------------
+UserTest: test_email_should_not_be_too_long
+-------------------------------------------
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com') LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------------------------------------------------------------
+UserTest: test_email_addresses_should_be_unique_and_the_uppercase_will_be_converted_to_lowercase
+------------------------------------------------------------------------------------------------
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Example User"], ["email", "user@example.com"], ["password_digest", "$2a$04$Cb6Lle6hzRkpbqKi6apSdOQ9ELnDSxNvTi5oH1geQn4d/lO/4dhAS"], ["created_at", "2018-01-12 13:41:32.547203"], ["updated_at", "2018-01-12 13:41:32.547203"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('USER@EXAMPLE.COM') LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+UserTest: test_name_should_not_be_too_long
+------------------------------------------
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------
+SiteLayoutTest: test_homepage_layout_links
+------------------------------------------
+Started GET "/" for 127.0.0.1 at 2018-01-12 21:41:32 +0800
+Processing by HomesController#index as HTML
+  Rendered homes/index.html.erb within layouts/application (2.3ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+  Rendered layouts/_content.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 8ms (Views: 7.3ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.4ms)[0m  [1mROLLBACK[0m
