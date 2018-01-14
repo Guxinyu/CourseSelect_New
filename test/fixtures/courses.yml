@@ -8,6 +8,7 @@
 # # column: value
 # #
 # two: {}
+<<<<<<< HEAD
 #  column: value
 course1:
   id: 2
@@ -22,3 +23,13 @@ course1:
   limit_num: 100
   class_room: 1
   course_week: 1
+=======
+# #  column: value
+
+course1:
+  id: 1
+  name: 计算机体系结构
+  course_code: 091M4001H
+  course_type: 专业核心课
+  teacher: teaer1
+>>>>>>> 71c2efedac02893cf3d0878ca247271e0516c4ea

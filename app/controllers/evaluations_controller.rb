@@ -138,7 +138,6 @@ class EvaluationsController < ApplicationController
          @courses = Course.where(" name LIKE '%#{@selectcontent}%' or course_code LIKE '%#{@selectcontent}%' ").all.paginate(page: params[:page], per_page: 4)
       else 
          ids=selectedusersids.join(',')
-         puts ids
          @courses = Course.where(" name LIKE '%#{@selectcontent}%' or course_code LIKE '%#{@selectcontent}%' or teacher_id in (#{ids}) ").all.paginate(page: params[:page], per_page: 4)
       end 
     end

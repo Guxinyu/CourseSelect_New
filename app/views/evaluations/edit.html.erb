@@ -18,10 +18,21 @@
  
         <%= form_tag(insert_evaluation_url(@course), method: "post") do%>
           <h4 >评估课程: <div style="color:#1874CD;display:inline"><%= @course.name %></div> 
-               &nbsp &nbsp 主讲教师：<div style="color:#1874CD;display:inline"><%= @course.teacher.name %></div></h4>
+               &nbsp &nbsp 主讲教师：<div style="color:#1874CD;display:inline"><%= 
+              
+              if @course.teacher.nil?
+                              
+              else
+                 @course.teacher.name 
+              end
+               %></div></h4>
 
           <!--#selected before?-->
-          <% evaluation1=Evaluation.where(:user_id=>current_user.id,:course_id=>@course.id).first
+          <% 
+            if current_user.nil?
+            else 
+               evaluation1=Evaluation.where(:user_id=>current_user.id,:course_id=>@course.id).first
+            end
             selecteds=Array.new(@itemscount+1,0)                  
             if evaluation1.nil? 
                puts "888"                                           

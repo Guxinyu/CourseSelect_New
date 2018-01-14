@@ -16,7 +16,13 @@
         <div class="panel-body">
  
           <h4>评估课程: <div style="color:#1874CD;display:inline"><%= @course.name %></div> 
-              &nbsp &nbsp 主讲教师：<div style="color:#1874CD;display:inline"><%= @course.teacher.name %></div></h4>
+              &nbsp &nbsp 主讲教师：<div style="color:#1874CD;display:inline"><%= 
+              if @course.teacher.nil?
+                              
+              else
+                 @course.teacher.name 
+              end
+              %></div></h4>
            
 
  

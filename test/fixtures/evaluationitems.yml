@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  itemcontent: MyString
 
-two:
-  itemcontent: MyString
+
+evaluationimte1:
+  id: 2
+  itemcontent: itemcontent1
+
+evaluationimte2:
+  id: 1
+  itemcontent: 总体评价
