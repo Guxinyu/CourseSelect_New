@@ -38,6 +38,8 @@
 ![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/sun/s5.png)
 8. 教师根据权限查看评估反馈功能
 9. 数据库设计：新建表evaluations、新建表evaluationitems、Courses表添加权限字段isopen。
+![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/sun/db.png)
+10. 测试结果
 ![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/sun/st.png)
 ### 新增通知功能模块
 1. 教师发布通知
