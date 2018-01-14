@@ -53,7 +53,9 @@
             </tr>
             <tr>
               <td>主讲教师</td>  
+              <% if !@course.teacher.nil?%>
               <td><%= @course.teacher.name %></td>
+              <% end %>
             </tr>
             </tr>
             </thead>

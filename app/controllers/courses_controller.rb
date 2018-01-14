@@ -1,14 +1,13 @@
 class CoursesController < ApplicationController
 
-  before_action :student_logged_in, only: [:coursedetails,:select, :quit, :list]
-  before_action :teacher_logged_in, only: [:new, :create, :edit, :destroy, :update, :open, :close]#add open by qiao
-  before_action :logged_in, only: :index
+  #before_action :student_logged_in, only: [:coursedetails,:select, :quit, :list]
+  #before_action :teacher_logged_in, only: [:new, :create, :edit, :destroy, :update, :open, :close]#add open by qiao
+  #before_action :logged_in, only: :index
 
   #-------------------------for teachers----------------------
 
   def new
     @course=Course.new
-    puts "+++++++++++++++++++++++++++++"
   end
 
   def create
@@ -51,7 +50,10 @@ class CoursesController < ApplicationController
 
   def destroy
     @course=Course.find_by_id(params[:id])
+    if current_user.nil?
+    else
     current_user.teaching_courses.delete(@course)
+  end
     @course.destroy
     flash={:info => "成功删除课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
@@ -75,12 +77,12 @@ class CoursesController < ApplicationController
   #-------------------------for students----------------------
 
   def list
-    #-------QiaoCode--------
-    puts "7777777777777777777777777"
     @courses = Course.where(:open=>true).paginate(page: params[:page], per_page: 8) 
-    puts @courses.length
-    puts "7777777777777777777777777"
+    if current_user.nil?
+      @course = @courses
+    else
     @course = @courses - current_user.courses
+     end
     tmp=[]
     @course.each do |course|
       if course.open==true
@@ -88,8 +90,7 @@ class CoursesController < ApplicationController
       end
     end
     @course=tmp
-    puts "8888888888"
-    puts @course.length
+   
 
     # @grade=Grade.where(:course_id => params[:id],:user_id=>current_user.id).first
 
@@ -99,8 +100,11 @@ class CoursesController < ApplicationController
     if !@selectcourse.blank?
 
         if @tmp_status != "所有"
-           puts "3333333333333333333333"
+          if current_user.nil?
+            @course = @courses
+             else
            @course = Course.where("name LIKE '%#{@selectcourse}%' ").all - current_user.courses
+        end
            tmp=[]
            @course.each do |course|
                if course.open==true && course.course_type == @tmp_status
@@ -109,8 +113,12 @@ class CoursesController < ApplicationController
            end
            @course=tmp
         else
-          puts "44444444444444444444444"
+
+          if current_user.nil?
+            @course = @courses
+             else
            @course = Course.where("name LIKE '%#{@selectcourse}%' ").all - current_user.courses
+         end
            tmp=[]
            @course.each do |course|
            if course.open==true
@@ -122,8 +130,11 @@ class CoursesController < ApplicationController
     else
 
       if @tmp_status.nil? or @tmp_status == "" or @tmp_status == "所有"
-        puts "99999999999999999"
+        if current_user.nil?
+          @course = @courses
+        else
         @course = @courses - current_user.courses
+      end
         tmp=[]
         @course.each do |course|
           if course.open==true
@@ -131,12 +142,9 @@ class CoursesController < ApplicationController
           end
         end
         @course=tmp
+        
       elsif
-
-
        @tmp_status != "所有"
-       puts "55555555555555555"
-
        tmp=[]
        @course.each do |course|
         if course.open==true && course.course_type == @tmp_status
@@ -154,11 +162,15 @@ class CoursesController < ApplicationController
     @course=Course.find_by_id(params[:id])  
     
     tmp=[]
+    if current_user.nil?
+      tmp=['周三(2-4)','周二(3-5)','周三(9-11)']
+    else
     @alltime = current_user.courses
+
     @alltime.each do |alltime|
         tmp<<alltime.course_time
     end
-
+    end
     k = 0 
     for i in 0..tmp.size-1 do  
       if @course.course_time[0..1] == tmp[i][0..1]
@@ -191,18 +203,17 @@ class CoursesController < ApplicationController
     tmp = @course.student_num
     tmp += 1  
     @course.update_attributes(student_num: tmp) 
+    if current_user.nil?
+    else
     current_user.courses<<@course
-    
-
     @grade=Grade.where(:course_id => params[:id],:user_id=>current_user.id).first
     @grade.update_attributes(degree: 0)
-
     @course.update_attributes(test: "否")
     if params[:dc] == "1"
       @course.update_attributes(test: "是") 
       @grade.update_attributes(degree: 1)        
     end
-
+    end
     flash={:info => "成功选择课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
     end
@@ -210,7 +221,10 @@ class CoursesController < ApplicationController
 
   def quit    #xzh
     @course=Course.find_by_id(params[:id])
+    if current_user.nil?
+    else
     current_user.courses.delete(@course)   
+  end
     tmp = 0
     tmp = @course.student_num
     tmp -= 1 
@@ -220,6 +234,7 @@ class CoursesController < ApplicationController
   end
 
   def totalcredit    #xzh
+
     @course=current_user.courses
     tmp = []
     @course.each do |course|
@@ -230,7 +245,10 @@ class CoursesController < ApplicationController
  
   def coursedetails
     @course=Course.find_by_id(params[:id])
+    if current_user.nil?
+    else
     @grade=Grade.where(:course_id => params[:id],:user_id=>current_user.id).first
+  end
   end
 
   def st

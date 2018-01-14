@@ -46,7 +46,9 @@
                   <td><%= course.course_type %></td>
                   <td><%= course.teaching_type %></td>
                   <td><%= course.exam_type %></td>
+                  <% if !course.teacher.nil?%>
                   <td><%= course.teacher.name %></td>
+                  <% end %>
                  
                   <% if course.limit_num == course.student_num %>
                  <td align="center">选课人数已满&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>

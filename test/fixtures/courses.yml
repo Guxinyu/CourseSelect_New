@@ -4,8 +4,21 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
+# one: {}
+# # column: value
+# #
+# two: {}
 #  column: value
+course1:
+  id: 2
+  name: coursename1
+  open: true
+  course_time: 周三(5-7)
+  course_code: 1
+  course_type: 1
+  teaching_type: 1
+  exam_type: 1
+  credit: 1
+  limit_num: 100
+  class_room: 1
+  course_week: 1
