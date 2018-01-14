@@ -43,7 +43,12 @@
                   <td><%= course.credit %></td>
                   <td><%= course.exam_type %></td>
                   <!-- skk1 delete &-->
-                  <td><%= course.teacher.name %></td>
+                  <td><%=  if course.teacher.nil?
+                              
+                           else
+                              course.teacher.name 
+                           end%>            
+                  </td>
 
                   <% if teacher_logged_in? %>
                       <td><%= link_to "编辑", edit_course_url(course), class: 'btn btn-xs btn-info' %></td>

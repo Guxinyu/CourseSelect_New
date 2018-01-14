@@ -55,10 +55,10 @@ Rails.application.routes.draw do
       get :closefeedback
       patch :itemupdate
       delete :itemdelete
-      post :itemadd
     end
     collection do
       get :items
+      post :itemadd      
     end
   end 
 
