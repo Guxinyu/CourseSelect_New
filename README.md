@@ -25,6 +25,7 @@
 ![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/xu/xzh%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png)
 ### 新增评估功能模块
 1. 学生对已选课程评估
+![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/sun/s1.png)
 2. 学生查看修改评估
 3. 管理员搜索课程功能
 4. 管理员查看课程评估结果功能
