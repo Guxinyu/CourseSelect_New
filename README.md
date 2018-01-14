@@ -1,6 +1,8 @@
 # 鲸鱼选课系统  [![Build Status](https://www.travis-ci.org/skkshr/CourseSelect_New.svg?branch=master)](https://www.travis-ci.org/skkshr/CourseSelect_New)
 国科大研究生课程 高级软件工程 大作业
 在原有系统CourseSelect的基础上新增部分新功能和完善已有功能。
+
+线上地址http://45.63.62.120:3000
 ### 选课模块相关改进
 1. 勾选学位课和课程检索
 ![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/xu/x1.png)
