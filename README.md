@@ -3,7 +3,7 @@
 在原有系统CourseSelect的基础上新增部分新功能和完善已有功能。
 ### 选课模块相关改进
 1. 勾选学位课和课程检索
-![](CourseSelect_New/raw/xu/x1.png)
+![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/xu/x1.png)
 2. 查看课程详情
 3. 我的课表
 4. 学分统计
