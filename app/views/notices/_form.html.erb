@@ -30,7 +30,11 @@
       </div>
     </div>
 
-    <%= f.submit '发布', class: "btn btn-primary btn-block" %>
+     <tr>
+       <%= check_box_tag (:send_mail) %> 
+       <%= label_tag :send_mail, "同时发送邮件" %> 
+       <%= f.submit '发布', class: "btn btn-primary btn-block" %> 
+    </tr>
     <%= link_to '取消', notices_path, :class => "btn btn-default btn-block" %>
 
 <% end %>

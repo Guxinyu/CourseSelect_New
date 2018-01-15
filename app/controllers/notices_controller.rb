@@ -12,12 +12,17 @@ class NoticesController < ApplicationController
   end
 
 
-  def create
+ def create
     @notice = Notice.new(notice_params)
     @notice.course_name = Course.find_by_id(@notice.course_id).name
+    @students = Course.find_by_id(@notice.course_id).users  
     if @notice.save
-
-      redirect_to notices_path, flash: {info: "新通知已发布"}
+      if params[:send_email]==true
+        @students.each do |student|
+        UserMailer.notify(student,@notice).deliver_now
+        end
+      end
+      redirect_to notices_path, flash: {success: "新通知已发布"}
     else
       flash[:warning] = "信息填写有误,请重试"
       render 'new'
@@ -30,7 +35,13 @@ class NoticesController < ApplicationController
 
   def update
     @notice = Notice.find_by_id(params[:id])
+    @students = Course.find_by_id(@notice.course_id).users  
     if @notice.update_attributes(notice_params)
+      if params[:send_email]==true
+        @students.each do |student|
+        UserMailer.notify(student,@notice).deliver_now
+        end
+      end
       flash={:info => "更新成功"}
     else
       flash={:warning => "更新失败"}
@@ -48,7 +59,7 @@ class NoticesController < ApplicationController
 
 
 #---------------------for both teachers and students-------------------
- def index
+  def index
   if params[:q].nil? or params[:q]==""
       if teacher_logged_in?
         @courses=current_user.teaching_courses
@@ -74,26 +85,29 @@ class NoticesController < ApplicationController
         redirect_to root_path, flash: {:warning=>"请先登陆"}
       end
   else
-      @courses1=Course.where("name LIKE '%#{params[:q]}%'").all
       if teacher_logged_in?
-        @courses2=current_user.teaching_courses
-        @courses=@courses1&@courses2
+        @courses=current_user.teaching_courses
+        # @courses=@courses1&@courses2
         tmp=[]
         @courses.each do |course|
           @notices=course.notices
           @notices.each do |notice|
-            tmp<<notice
+            if notice.theme.include?params[:q] or notice.course_name.include?params[:q] or notice.updated_at.utc.strftime('%Y-%m-%d %H:%M %p').include?params[:q]
+              tmp<<notice
+            end
           end
         end
         @notice=tmp
       elsif student_logged_in?
         @courses2=current_user.courses
-         @courses=@courses1&@courses2
+         # @courses=@courses1&@courses2
         tmp=[]
         @courses.each do |course|
           @notices=course.notices
           @notices.each do |notice|
-            tmp<<notice
+            if notice.theme.include?params[:q] or notice.course_name.include?params[:q] or notice.updated_at.utc.strftime('%Y-%m-%d %H:%M %p').include?params[:q]
+              tmp<<notice
+            end
           end
         end
         @notice=tmp
