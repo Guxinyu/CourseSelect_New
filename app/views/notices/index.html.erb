@@ -37,6 +37,7 @@
 
             <tbody style="font-size:16px;">
             <% $count=0 %>
+            <% if not notice.nil? %>
             <% @notice.each do |notice|%>
                 <%$count=$count+1%>
                 <tr >
@@ -52,6 +53,7 @@
                       <td><%= link_to "查看", check_notice_path(notice), class: 'btn-sm btn-primary' ,:style=>"font-size:14px;"%></td>
                   <% end %>
                 </tr>
+              <% end %>
             <% end %>
             </tbody>
           </table>

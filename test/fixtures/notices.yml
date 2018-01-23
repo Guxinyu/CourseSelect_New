@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  theme: MyString
-  content: MyString
-  publish_time: MyString
-  course_name: MyString
-  course: 
+  id: 1
+  theme: ceshi1
+  content: ceshi1
+  publish_time: "16:25"
+  course_name: 计算机体系结构
+  course_id: 1
 
 two:
-  theme: MyString
-  content: MyString
-  publish_time: MyString
-  course_name: MyString
-  course: 
+  id: 2
+  theme: ceshi2
+  content: ceshi2
+  publish_time: "17:26"
+  course_name: 计算机网络
+  course_id: 2

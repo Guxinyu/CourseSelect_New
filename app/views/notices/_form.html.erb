@@ -6,7 +6,10 @@
       <div class="col-sm-9">
         <div class="input-group">
           <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-           <%= f.select :course_id, options_for_select(current_user.teaching_courses.map{|f| [f.name,f.id]}) , style: "padding-right: 100px"%>                      
+
+           <%=  if not current_user.nil? 
+            f.select :course_id, options_for_select(current_user.teaching_courses.map{|f| [f.name,f.id]}) , style: "padding-right: 100px"
+            end %>                      
         </div>
       </div>
     </div>
