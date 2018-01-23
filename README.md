@@ -4,6 +4,14 @@
 在原有系统CourseSelect的基础上新增部分新功能和完善已有功能,并对新增功能编写了测试代码。
 
 线上地址http://45.63.62.120:3000
+### 部署过程
+1. 安装和配置PostgreSQL
+2. 安装rbenv工具
+3. 安装Ruby
+4. 安装Rails
+5. 使用XFTP将项目代码传到服务器45.63.62.120
+6. 进入项目路径下分别执行bundle install、rake db:migrate、rake db:seed
+7. 启动项目rails server -b 45.63.62.120
 ### 选课模块相关改进
 1. 勾选学位课和课程检索
 ![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/xu/x1.png)
