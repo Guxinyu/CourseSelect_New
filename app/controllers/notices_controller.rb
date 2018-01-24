@@ -70,8 +70,6 @@ class NoticesController < ApplicationController
           end
         end
         @notice=tmp
-        puts 666666666666666666666666
-        puts @notice
       elsif student_logged_in?
         @courses=current_user.courses
         tmp=[]

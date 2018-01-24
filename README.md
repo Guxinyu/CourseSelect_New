@@ -50,7 +50,14 @@
 10. 测试结果
 ![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/sun/st.png)
 ### 新增通知功能模块
-1. 教师发布通知
+1. 教师发布通知（新增是否发送邮件的功能）
+![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/jin/发布通知.png)
 2. 历史通知记录
-3. 学生查看通知
-4. 通知搜索功能
+![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/jin/历史记录.png)
+3. 通知搜索功能（更改为全字段搜索）
+例子：搜索时间
+![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/jin/搜索通知.png)
+搜索结果
+![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/jin/搜索通知结果.png)
+4. 查看通知功能
+![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/jin/查看通知.png)
