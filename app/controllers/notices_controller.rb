@@ -58,11 +58,9 @@ class NoticesController < ApplicationController
   end
 
 
-#---------------------for both teachers and students-------------------
-  def index
+ def index
   if params[:q].nil? or params[:q]==""
       if teacher_logged_in?
-        if not current_user.nil?
         @courses=current_user.teaching_courses
         tmp=[]
         @courses.each do |course|
@@ -70,18 +68,17 @@ class NoticesController < ApplicationController
           @notices.each do |notice|
             tmp<<notice
           end
-          end
         end
         @notice=tmp
+        puts 666666666666666666666666
+        puts @notice
       elsif student_logged_in?
-        if not current_user.nil?
         @courses=current_user.courses
         tmp=[]
         @courses.each do |course|
           @notices=course.notices
           @notices.each do |notice|
             tmp<<notice
-          end
           end
         end
         @notice=tmp
@@ -90,7 +87,6 @@ class NoticesController < ApplicationController
       end
   else
       if teacher_logged_in?
-        if not current_user.nil?
         @courses=current_user.teaching_courses
         # @courses=@courses1&@courses2
         tmp=[]
@@ -100,12 +96,10 @@ class NoticesController < ApplicationController
             if notice.theme.include?params[:q] or notice.course_name.include?params[:q] or notice.updated_at.utc.strftime('%Y-%m-%d %H:%M %p').include?params[:q]
               tmp<<notice
             end
-            end
           end
         end
         @notice=tmp
       elsif student_logged_in?
-        if not current_user.nil?
         @courses2=current_user.courses
          # @courses=@courses1&@courses2
         tmp=[]
@@ -114,7 +108,6 @@ class NoticesController < ApplicationController
           @notices.each do |notice|
             if notice.theme.include?params[:q] or notice.course_name.include?params[:q] or notice.updated_at.utc.strftime('%Y-%m-%d %H:%M %p').include?params[:q]
               tmp<<notice
-            end
             end
           end
         end

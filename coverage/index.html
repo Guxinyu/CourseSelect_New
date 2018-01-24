@@ -14,27 +14,27 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2018-01-23T00:04:57+08:00">2018-01-23T00:04:57+08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2018-01-24T12:51:40+08:00">2018-01-24T12:51:40+08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">57.04%</span></span>
+    (<span class="covered_percent"><span class="red">57.21%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.87
+         1.88
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>19</b> files in total.
-    <b>682</b> relevant lines. 
+    <b>680</b> relevant lines. 
     <span class="green"><b>389</b> lines covered</span> and
-    <span class="red"><b>293</b> lines missed </span>
+    <span class="red"><b>291</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -102,11 +102,11 @@
       
       <tr>
         <td class="strong"><a href="#0c461e83e30c99b431e8be1d63335f539e1ab891" class="src_link" title="app/controllers/notices_controller.rb">app/controllers/notices_controller.rb</a></td>
-        <td class="red strong">45.35 %</td>
-        <td>157</td>
-        <td>86</td>
+        <td class="red strong">46.43 %</td>
+        <td>150</td>
+        <td>84</td>
         <td>39</td>
-        <td>47</td>
+        <td>45</td>
         <td>0.6</td>
       </tr>
       
@@ -249,7 +249,7 @@
           <div class="file_list_container" id="Controllers">
   <h2>
     <span class="group_name">Controllers</span>
-    (<span class="covered_percent"><span class="red">56.0%</span></span>
+    (<span class="covered_percent"><span class="red">56.2%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
@@ -260,9 +260,9 @@
   <a name="Controllers"></a>
   <div>
     <b>8</b> files in total.
-    <b>575</b> relevant lines. 
+    <b>573</b> relevant lines. 
     <span class="green"><b>322</b> lines covered</span> and
-    <span class="red"><b>253</b> lines missed </span>
+    <span class="red"><b>251</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -330,11 +330,11 @@
       
       <tr>
         <td class="strong"><a href="#0c461e83e30c99b431e8be1d63335f539e1ab891" class="src_link" title="app/controllers/notices_controller.rb">app/controllers/notices_controller.rb</a></td>
-        <td class="red strong">45.35 %</td>
-        <td>157</td>
-        <td>86</td>
+        <td class="red strong">46.43 %</td>
+        <td>150</td>
+        <td>84</td>
         <td>39</td>
-        <td>47</td>
+        <td>45</td>
         <td>0.6</td>
       </tr>
       
@@ -4792,11 +4792,11 @@
         <div class="source_table" id="0c461e83e30c99b431e8be1d63335f539e1ab891">
   <div class="header">
     <h3>app/controllers/notices_controller.rb</h3>
-    <h4><span class="red">45.35 %</span> covered</h4>
+    <h4><span class="red">46.43 %</span> covered</h4>
     <div>
-      <b>86</b> relevant lines. 
+      <b>84</b> relevant lines. 
       <span class="green"><b>39</b> lines covered</span> and
-      <span class="red"><b>47</b> lines missed.</span>
+      <span class="red"><b>45</b> lines missed.</span>
     </div>
   </div>
   
@@ -5163,424 +5163,424 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="61">
-          
-          
-          <code class="ruby">#---------------------for both teachers and students-------------------</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="62">
+        <li class="covered" data-hits="1" data-linenumber="61">
           <span class="hits">1</span>
           
-          <code class="ruby">  def index</code>
+          <code class="ruby"> def index</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="63">
+        <li class="covered" data-hits="2" data-linenumber="62">
           <span class="hits">2</span>
           
           <code class="ruby">  if params[:q].nil? or params[:q]==&quot;&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="64">
+        <li class="covered" data-hits="1" data-linenumber="63">
           <span class="hits">1</span>
           
           <code class="ruby">      if teacher_logged_in?</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="64">
+          
+          
+          <code class="ruby">        @courses=current_user.teaching_courses</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="65">
           
           
-          <code class="ruby">        if not current_user.nil?</code>
+          <code class="ruby">        tmp=[]</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="66">
           
           
-          <code class="ruby">        @courses=current_user.teaching_courses</code>
+          <code class="ruby">        @courses.each do |course|</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="67">
           
           
-          <code class="ruby">        tmp=[]</code>
+          <code class="ruby">          @notices=course.notices</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="68">
           
           
-          <code class="ruby">        @courses.each do |course|</code>
+          <code class="ruby">          @notices.each do |notice|</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="69">
           
           
-          <code class="ruby">          @notices=course.notices</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="70">
-          
-          
-          <code class="ruby">          @notices.each do |notice|</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="71">
-          
-          
           <code class="ruby">            tmp&lt;&lt;notice</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="never" data-hits="" data-linenumber="70">
           
           
           <code class="ruby">          end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="73">
-          
-          
-          <code class="ruby">          end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="74">
+        <li class="never" data-hits="" data-linenumber="71">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="75">
+        <li class="missed" data-hits="0" data-linenumber="72">
           
           
           <code class="ruby">        @notice=tmp</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="76">
+        <li class="missed" data-hits="0" data-linenumber="73">
+          
+          
+          <code class="ruby">        puts 666666666666666666666666</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="74">
+          
+          
+          <code class="ruby">        puts @notice</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="75">
           <span class="hits">1</span>
           
           <code class="ruby">      elsif student_logged_in?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="77">
-          
-          
-          <code class="ruby">        if not current_user.nil?</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="78">
+        <li class="missed" data-hits="0" data-linenumber="76">
           
           
           <code class="ruby">        @courses=current_user.courses</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="79">
+        <li class="missed" data-hits="0" data-linenumber="77">
           
           
           <code class="ruby">        tmp=[]</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="78">
+          
+          
+          <code class="ruby">        @courses.each do |course|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="79">
+          
+          
+          <code class="ruby">          @notices=course.notices</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="80">
           
           
-          <code class="ruby">        @courses.each do |course|</code>
+          <code class="ruby">          @notices.each do |notice|</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="81">
           
           
-          <code class="ruby">          @notices=course.notices</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="82">
-          
-          
-          <code class="ruby">          @notices.each do |notice|</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="83">
-          
-          
           <code class="ruby">            tmp&lt;&lt;notice</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="84">
+        <li class="never" data-hits="" data-linenumber="82">
           
           
           <code class="ruby">          end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby">        end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="84">
+          
+          
+          <code class="ruby">        @notice=tmp</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="85">
           
           
-          <code class="ruby">          end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="86">
-          
-          
-          <code class="ruby">        end</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="87">
-          
-          
-          <code class="ruby">        @notice=tmp</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="88">
-          
-          
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="89">
+        <li class="covered" data-hits="1" data-linenumber="86">
           <span class="hits">1</span>
           
           <code class="ruby">        redirect_to root_path, flash: {:warning=&gt;&quot;请先登陆&quot;}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="90">
+        <li class="never" data-hits="" data-linenumber="87">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="91">
+        <li class="never" data-hits="" data-linenumber="88">
           
           
           <code class="ruby">  else</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="92">
+        <li class="covered" data-hits="1" data-linenumber="89">
           <span class="hits">1</span>
           
           <code class="ruby">      if teacher_logged_in?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="93">
-          
-          
-          <code class="ruby">        if not current_user.nil?</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="94">
+        <li class="missed" data-hits="0" data-linenumber="90">
           
           
           <code class="ruby">        @courses=current_user.teaching_courses</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="95">
+        <li class="never" data-hits="" data-linenumber="91">
           
           
           <code class="ruby">        # @courses=@courses1&amp;@courses2</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="96">
+        <li class="missed" data-hits="0" data-linenumber="92">
           
           
           <code class="ruby">        tmp=[]</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="93">
+          
+          
+          <code class="ruby">        @courses.each do |course|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="94">
+          
+          
+          <code class="ruby">          @notices=course.notices</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="95">
+          
+          
+          <code class="ruby">          @notices.each do |notice|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="96">
+          
+          
+          <code class="ruby">            if notice.theme.include?params[:q] or notice.course_name.include?params[:q] or notice.updated_at.utc.strftime(&#39;%Y-%m-%d %H:%M %p&#39;).include?params[:q]</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="97">
           
           
-          <code class="ruby">        @courses.each do |course|</code>
+          <code class="ruby">              tmp&lt;&lt;notice</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="98">
+        <li class="never" data-hits="" data-linenumber="98">
           
           
-          <code class="ruby">          @notices=course.notices</code>
+          <code class="ruby">            end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="99">
+        <li class="never" data-hits="" data-linenumber="99">
           
           
-          <code class="ruby">          @notices.each do |notice|</code>
+          <code class="ruby">          end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="100">
+        <li class="never" data-hits="" data-linenumber="100">
           
           
-          <code class="ruby">            if notice.theme.include?params[:q] or notice.course_name.include?params[:q] or notice.updated_at.utc.strftime(&#39;%Y-%m-%d %H:%M %p&#39;).include?params[:q]</code>
+          <code class="ruby">        end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="101">
           
           
-          <code class="ruby">              tmp&lt;&lt;notice</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="102">
-          
-          
-          <code class="ruby">            end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="103">
-          
-          
-          <code class="ruby">            end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="104">
-          
-          
-          <code class="ruby">          end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="105">
-          
-          
-          <code class="ruby">        end</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="106">
-          
-          
           <code class="ruby">        @notice=tmp</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="107">
+        <li class="covered" data-hits="1" data-linenumber="102">
           <span class="hits">1</span>
           
           <code class="ruby">      elsif student_logged_in?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="108">
-          
-          
-          <code class="ruby">        if not current_user.nil?</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="109">
+        <li class="missed" data-hits="0" data-linenumber="103">
           
           
           <code class="ruby">        @courses2=current_user.courses</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="110">
+        <li class="never" data-hits="" data-linenumber="104">
           
           
           <code class="ruby">         # @courses=@courses1&amp;@courses2</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="111">
+        <li class="missed" data-hits="0" data-linenumber="105">
           
           
           <code class="ruby">        tmp=[]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="112">
+        <li class="missed" data-hits="0" data-linenumber="106">
           
           
           <code class="ruby">        @courses.each do |course|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="113">
+        <li class="missed" data-hits="0" data-linenumber="107">
           
           
           <code class="ruby">          @notices=course.notices</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="114">
+        <li class="missed" data-hits="0" data-linenumber="108">
           
           
           <code class="ruby">          @notices.each do |notice|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="115">
+        <li class="missed" data-hits="0" data-linenumber="109">
           
           
           <code class="ruby">            if notice.theme.include?params[:q] or notice.course_name.include?params[:q] or notice.updated_at.utc.strftime(&#39;%Y-%m-%d %H:%M %p&#39;).include?params[:q]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="116">
+        <li class="missed" data-hits="0" data-linenumber="110">
           
           
           <code class="ruby">              tmp&lt;&lt;notice</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="117">
+        <li class="never" data-hits="" data-linenumber="111">
           
           
           <code class="ruby">            end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="118">
-          
-          
-          <code class="ruby">            end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="119">
+        <li class="never" data-hits="" data-linenumber="112">
           
           
           <code class="ruby">          end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="120">
+        <li class="never" data-hits="" data-linenumber="113">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="121">
+        <li class="missed" data-hits="0" data-linenumber="114">
           
           
           <code class="ruby">        @notice=tmp</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="122">
+        <li class="never" data-hits="" data-linenumber="115">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="123">
+        <li class="never" data-hits="" data-linenumber="116">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="124">
+        <li class="never" data-hits="" data-linenumber="117">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="125">
+        <li class="never" data-hits="" data-linenumber="118">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="126">
+        <li class="covered" data-hits="1" data-linenumber="119">
           <span class="hits">1</span>
           
           <code class="ruby">  def check</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="127">
+        <li class="covered" data-hits="1" data-linenumber="120">
           <span class="hits">1</span>
           
           <code class="ruby">    @notice=Notice.find_by_id(params[:id])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="128">
+        <li class="never" data-hits="" data-linenumber="121">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="129">
+        <li class="never" data-hits="" data-linenumber="122">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="130">
+        <li class="covered" data-hits="1" data-linenumber="123">
           <span class="hits">1</span>
           
           <code class="ruby">  private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="124">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="125">
+          
+          
+          <code class="ruby">  # Confirms a student logged-in user.</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="126">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def student_logged_in</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="127">
+          
+          
+          <code class="ruby">    unless student_logged_in?</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="128">
+          
+          
+          <code class="ruby">      redirect_to root_url, flash: {danger: &#39;请登陆&#39;}</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="129">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="130">
+          
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="131">
@@ -5592,19 +5592,19 @@
         <li class="never" data-hits="" data-linenumber="132">
           
           
-          <code class="ruby">  # Confirms a student logged-in user.</code>
+          <code class="ruby">  # Confirms a teacher logged-in user.</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="133">
           <span class="hits">1</span>
           
-          <code class="ruby">  def student_logged_in</code>
+          <code class="ruby">  def teacher_logged_in</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="134">
           
           
-          <code class="ruby">    unless student_logged_in?</code>
+          <code class="ruby">    unless teacher_logged_in?</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="135">
@@ -5634,19 +5634,19 @@
         <li class="never" data-hits="" data-linenumber="139">
           
           
-          <code class="ruby">  # Confirms a teacher logged-in user.</code>
+          <code class="ruby">  # Confirms a  logged-in user.</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="140">
           <span class="hits">1</span>
           
-          <code class="ruby">  def teacher_logged_in</code>
+          <code class="ruby">  def logged_in</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="141">
           
           
-          <code class="ruby">    unless teacher_logged_in?</code>
+          <code class="ruby">    unless logged_in?</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="142">
@@ -5673,73 +5673,31 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="146">
-          
-          
-          <code class="ruby">  # Confirms a  logged-in user.</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="147">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def logged_in</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="148">
-          
-          
-          <code class="ruby">    unless logged_in?</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="149">
-          
-          
-          <code class="ruby">      redirect_to root_url, flash: {danger: &#39;请登陆&#39;}</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="150">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="151">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="152">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="153">
+        <li class="covered" data-hits="1" data-linenumber="146">
           <span class="hits">1</span>
           
           <code class="ruby">  def notice_params</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="154">
+        <li class="covered" data-hits="3" data-linenumber="147">
           <span class="hits">3</span>
           
           <code class="ruby">    params.require(:notice).permit(:course_id,:publish_time,:theme, :content)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="155">
+        <li class="never" data-hits="" data-linenumber="148">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="156">
+        <li class="never" data-hits="" data-linenumber="149">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="157">
+        <li class="never" data-hits="" data-linenumber="150">
           
           
           <code class="ruby">end</code>
