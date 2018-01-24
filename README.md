@@ -12,6 +12,8 @@
 5. 使用XFTP将项目代码传到服务器45.63.62.120
 6. 进入项目路径下分别执行bundle install、rake db:migrate、rake db:seed
 7. 启动项目rails server -b 45.63.62.120
+### 测试结果
+![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/jin/test result.png)
 ### 选课模块相关改进
 1. 勾选学位课和课程检索
 ![](https://github.com/skkshr/CourseSelect_New/blob/master/raw/xu/x1.png)
